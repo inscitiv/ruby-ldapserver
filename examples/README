@@ -11,7 +11,7 @@ $ ruby rbslapd1.rb
 
 In another window:
 
-$ ldapadd -H ldap://127.0.0.1:1389/
+$ ldapadd -x -H ldap://127.0.0.1:1389/
 dn: dc=example,dc=com
 cn: Top object
 
@@ -28,9 +28,9 @@ mail: wilma@bedrock.org
 
 Try these queries:
 
-$ ldapsearch -H ldap://127.0.0.1:1389/ -b "" "(objectclass=*)"
-$ ldapsearch -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" -s base "(objectclass=*)"
-$ ldapsearch -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" "(mail=fred*)"
+$ ldapsearch -x -H ldap://127.0.0.1:1389/ -b "" "(objectclass=*)"
+$ ldapsearch -x -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" -s base "(objectclass=*)"
+$ ldapsearch -x -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" "(mail=fred*)"
 
 If you terminate the server with Ctrl-C, its contents should be written
 to disk as a YAML file.
@@ -52,7 +52,7 @@ In rbslapd1.rb, uncomment
 and run mkcert.rb. Since this is a self-signed certificate, you'll have to
 turn off certificate verification in the client too. For example:
 
-    $ env LDAPTLS_REQCERT="allow" ldapsearch -H ldaps://127.0.0.1:1389/
+    $ env LDAPTLS_REQCERT="allow" ldapsearch -x -H ldaps://127.0.0.1:1389/
 
 Making your own CA and installing its certificate in the client, or
 generating a Certificate Signing Request and sending it to a known CA, is

@@ -23,9 +23,9 @@ require 'resolv-replace'	# ruby threading DNS client
 # work even if the bind occurs on a different client connection to the search.
 #
 # To test:
-#    ldapsearch -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" "(uid=brian)"
+#    ldapsearch -x -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" "(uid=brian)"
 #
-#    ldapsearch -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" \
+#    ldapsearch -x -H ldap://127.0.0.1:1389/ -b "dc=example,dc=com" \
 #       -D "id=1,dc=example,dc=com" -W "(uid=brian)"
 
 $debug = true
