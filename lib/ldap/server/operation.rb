@@ -107,8 +107,15 @@ class Server
       end
 
       if @schema
-        # normalize the attribute names
-        @attributes = @attributes.collect { |a| @schema.find_attrtype(a).to_s }
+        # normalize the attribute names, but not '*' as it's probably
+        # not in the schema (being a magic value)
+        @attributes = @attributes.collect do |a|
+          if a == '*'
+            a
+          else
+            @schema.find_attrtype(a).to_s
+          end
+        end
       end
 
       sendall = @attributes == [] || @attributes.include?("*")
